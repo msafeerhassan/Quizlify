@@ -1,0 +1,238 @@
+{
+    "questions": [
+        {
+            "id" : 1,
+            "category" : "Python",
+            "difficulty": "easy",
+            "question": "What does len() do?",
+            "options": {
+                "A": "Returns the number of items in an Object",
+                "B": "Generates a random number",
+                "C": "Shortens a string",
+                "D": "Converts a string to lowercase"
+            },
+            "answer": "A"
+        },
+        {
+            "id" : 2,
+            "category" : "Python",
+            "difficulty": "easy",
+            "question": "Which keyword is used to define a function in Python?",
+            "options": {
+                "A": "func",
+                "B": "define",
+                "C": "def",
+                "D": "function"
+            },
+            "answer": "C"
+        },
+        {
+            "id" : 3,
+            "category" : "Python",
+            "difficulty": "easy",
+            "question": "What is the correct file extension for Python files?",
+            "options": {
+                "A": ".python",
+                "B": ".pip",
+                "C": ".pyt",
+                "D": ".py"
+            },
+            "answer": "D"
+        },
+        {
+            "id" : 4,
+            "category" : "Python",
+            "difficulty": "easy",
+            "question": "Which data type is used to store a sequence of True or False values?",
+            "options": {
+                "A": "String",
+                "B": "Integer",
+                "C": "Boolean",
+                "D": "List"
+            },
+            "answer": "C"
+        },
+        {
+            "id" : 5,
+            "category" : "Python",
+            "difficulty": "easy",
+            "question": "How do you insert comments in Python Code?",
+            "options": {
+                "A": "# Comment",
+                "B": "// Comment",
+                "C": "/* Comment */",
+                "D": "//.."
+            },
+            "answer": "A"
+        },
+        {
+            "id" : 6,
+            "category" : "Python",
+            "difficulty": "medium",
+            "question": "What is output of print(type([1,2]))?",
+            "options": {
+                "A": "<class 'tuple'>",
+                "B": "<class 'array'>",
+                "C": "<class 'set'>",
+                "D": "<class 'list'>"
+            },
+            "answer": "D"
+        },
+        {
+            "id" : 7,
+            "category" : "Python",
+            "difficulty": "medium",
+            "question": "Which keyword is used to handle exceptions in Python",
+            "options": {
+                "A": "catch",
+                "B": "try",
+                "C": "throw",
+                "D": "except"
+            },
+            "answer": "D"
+        },
+        {
+            "id" : 8,
+            "category" : "Python",
+            "difficulty": "medium",
+            "question": "What is the purpose of '__init__' method in Python classes?",
+            "options": {
+                "A": "To initialize the class attributes upon object creation",
+                "B": "To delete an instance of a class",
+                "C": "To import external modules into the class",
+                "D": "To convert object into string representation"
+            },
+            "answer": "A"
+        },
+        {
+            "id" : 9,
+            "category" : "Python",
+            "difficulty": "hard",
+            "question": "What is the output of expression: {1,2,3} & {2,3,4}?",
+            "options": {
+                "A": "{1,2,3,4}",
+                "B": "{2,3}",
+                "C": "{1,3}",
+                "D": "{}"
+            },
+            "answer": "B"
+        },
+        {
+            "id" : 10,
+            "category" : "Python",
+            "difficulty": "hard",
+            "question": "What does the 'yield' keyword do in Python Function",
+            "options": {
+                "A": "Suspends execution of the function and returns a generator object.",
+                "B": "Terminates the program immediately",
+                "C": "Imports a package dynamically",
+                "D": "Forces a loop to skip the current iteration"
+            },
+            "answer": "A"
+        },
+        {
+            "id" : 11,
+            "category" : "Science",
+            "difficulty": "easy",
+            "question": "What is chemical symbol for water?",
+            "options": {
+                "A": "H2O",
+                "B": "H2O2",
+                "C": "HO2",
+                "D": "HO"
+            },
+            "answer": "A"
+        },
+        {
+            "id" : 12,
+            "category" : "Science",
+            "difficulty": "easy",
+            "question": "Which planet is known as the Red Planet?",
+            "options": {
+                "A": "Mercury",
+                "B": "Pluto",
+                "C": "Neptune",
+                "D": "Mars"
+            },
+            "answer": "D"
+        },
+        {
+            "id" : 13,
+            "category" : "Science",
+            "difficulty": "easy",
+            "question": "Which gas do humans breathe out while plants breathe in for photosynthesis?",
+            "options": {
+                "A": "Oxygen",
+                "B": "Argon",
+                "C": "Hydrogen",
+                "D": "Carbon Dioxide"
+            },
+            "answer": "D"
+        },
+        {
+            "id" : 14,
+            "category" : "Science",
+            "difficulty": "medium",
+            "question": "Which organ in human body is referred as the 'Pump'?",
+            "options": {
+                "A": "Heart",
+                "B": "Lungs",
+                "C": "Brain",
+                "D": "Liver"
+            },
+            "answer": "A"
+        },
+        {
+            "id" : 15,
+            "category" : "Science",
+            "difficulty": "medium",
+            "question": "What is the primary source of power for our solar system?",
+            "options": {
+                "A": "Moon",
+                "B": "Black Hole",
+                "C": "Neutron Star",
+                "D": "Sun"
+            },
+            "answer": "D"
+        },
+        {
+            "id" : 16,
+            "category" : "Science",
+            "difficulty": "medium",
+            "question": "What is approximate speed of light?",
+            "options": {
+                "A": "300000 kilometers per second",
+                "B": "150000 kilometers per second",
+                "C": "Infinite",
+                "D": "50000 Kilometers per second"
+            },
+            "answer": "A"
+        },
+        {
+            "id" : 17,
+            "category" : "Science",
+            "difficulty": "hard",
+            "question": "What is the most abundant gas in Earth's atmosphere",
+            "options": {
+                "A": "Oxygen",
+                "B": "Carbon Dioxide",
+                "C": "Nitrogen",
+                "D": "Argon"
+            },
+            "answer": "C"
+        },
+        {
+            "id" : 18,
+            "category" : "Science",
+            "difficulty": "hard",
+            "question": "Which subatomic particle has a negative charge?",
+            "options": {
+                "A": "Positron",
+                "B": "Neutrino",
+                "C": "Electron",
+                "D": "Quark"
+            },
+            "answer": "C"
+        }
+    ]
+}
