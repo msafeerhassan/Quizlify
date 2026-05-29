@@ -251,13 +251,34 @@ def mainDocumentBasedGamePlay(userName):
             userScore -= 5
     saveScore(userName, userScore)
 
+def playAgainAsk():
+    while True:
+        consent = str(input("Would you like to play again (y/n): "))
+        if consent.lower() != "y" and consent.lower() != "n":
+            print("Please either choose Y or N!")
+            pass
+        elif consent.lower() == "y":
+            return True
+        elif consent.lower() == "n":
+            exit()
+
 userName = userNameAsk()
 userIntent = userIntentAsk(userName)
 
 if userIntent == 1:
-    mainDocumentBasedGamePlay(userName)
+    while True:
+        mainDocumentBasedGamePlay(userName)
+        if playAgainAsk() == True:
+            pass
+        else:
+            break
 elif userIntent == 2:
-    mainAIBasedGamePlay(userName)
+    while True:
+        mainAIBasedGamePlay(userName)
+        if playAgainAsk() == True:
+            pass
+        else:
+            break
 elif userIntent == 3:
     leaderboard()
 else: pass
