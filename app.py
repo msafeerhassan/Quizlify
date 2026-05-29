@@ -75,7 +75,7 @@ for question in randomizeList(retrieveQuestions(rawData, field, difficulty)):
     try:
         while True:
             userOption = inputimeout(prompt="Correct Option: ", timeout=15)
-            if userOption.upper() != "A" and userOption.upper() != "B" and userOption.upper() != "C" and userOption.upper != "D":
+            if userOption.upper() != "A" and userOption.upper() != "B" and userOption.upper() != "C" and userOption.upper() != "D":
                 print("Invalid Option Selected!")
                 pass
             else:
@@ -83,18 +83,17 @@ for question in randomizeList(retrieveQuestions(rawData, field, difficulty)):
                 break
     except TimeoutOccurred:
         print("\nTime's up!!")
-        userOption = 0
-    if str(userOption.upper()) == question['answer']:
+        userOption = "TIMEUP"
+        
+    if userOption == "TIMEUP":
+        print("You didn't selected any option :(\n5 Points Deducted")
+        userScore -= 5
+    elif userOption.upper() == question['answer']:
         print("Correct Answer!\n15 Points Awarded")
         userScore += 15
-    elif str(userOption.upper()) != question['answer']:
-        print("Oh! Wrong Answer :(\n5 Points Deducted")
-        print(f"Correct Option: {question['answer']}")
-        userScore -= 5
-    elif str(userOption) == "0":
-        print("You didn't selected any Option.\n5 Points Deducted")
     else:
-        print("Invalid Option.")
+        print("Oh! Wrong Option :(\n5 Points Deducted")
+        userScore -= 5
 
 
-print(userScore)
+print(f"Final Score: {userScore}")
