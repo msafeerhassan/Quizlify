@@ -97,10 +97,30 @@ def randomizeList(questionsList):
     return randomList
 
 def saveScore(username, score):
+    scoreDict = {}
     try:
-        with open('score.txt', 'a') as scoreFile:
-            scoreFile.write(f"\n{username}:{score}")
-            print("Score Recorded Successfully!")
+        with open('score.txt', 'r') as scoreFile:
+            lines = scoreFile.readlines()
+            for line in lines: 
+                line = line.strip()
+                if ":" in line:
+                    lineParts = line.split(":")
+                    existName = lineParts[0]
+                    existScore = int(lineParts[1])
+                    scoreDict[existName] = existScore
+    except FileNotFoundError:
+        pass
+
+    if username in scoreDict:
+        scoreDict[username] += score
+    else:
+        scoreDict[username] = score
+    
+    try:
+        with open('score.txt', 'w') as scoreFile:
+            for name, finalScore in scoreDict.items():
+                scoreFile.write(f"{name}:{finalScore}\n")
+        print("Score Recorded Successfully!")
     except Exception as e:
         print(f"Error: {e}")
 

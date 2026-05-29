@@ -1,3 +1,2 @@
-
-Safeer:30
-Safeer:45
+Safeer:60
+AHmad:25
