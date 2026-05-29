@@ -7,6 +7,32 @@ userOption = ""
 userScore = 0
 maxTime = 15
 
+def userNameAsk():
+    while True:
+        userName = str(input("Enter your name: "))
+        if userName == "" or len(userName) <= 2:
+            print("Please enter your name!")
+            pass
+        else:
+            return userName
+
+def userIntentAsk(username):
+    while True:
+        userIntent = int(input(f"""Hey {username}, would you like to:
+                               1. Play Game against Document Questions
+                               2. Play Game against AI
+                               3. Check Leaderboard
+                               4. Exit
+                               Your Choice: """))
+        if userIntent == 4:
+            print("Exiting...")
+            exit()
+        elif userIntent == 1 or userIntent == 2 or userIntent ==3:
+            return userIntent
+        else:
+            print("Error: Please either choose from 1, 2, 3 or 4.")
+            pass
+
 def chooseFieldDocument():
     while True:
         field = int(input("""Choose the general field of quiz:
@@ -70,7 +96,36 @@ def randomizeList(questionsList):
     randomList = random.sample(questionsList, k=length)
     return randomList
 
-def mainDocument():
+def saveScore(username, score):
+    try:
+        with open('score.txt', 'a') as scoreFile:
+            scoreFile.write(f"\n{username}:{score}")
+            print("Score Recorded Successfully!")
+    except Exception as e:
+        print(f"Error: {e}")
+
+def leaderboard():
+    try:
+        with open('score.txt', 'r') as file:
+            lines = file.readlines()
+    except FileNotFoundError:
+        print("No file found :(")
+        return
+    
+    print("LEADERBOARD:")
+
+    for line in lines:
+        line = line.strip()
+        if ":" in line:
+            lineParts = line.split(":")
+            name = lineParts[0]
+            score = lineParts[1]
+
+            print(f"{name} -> {score} Points")
+    print("\n")
+
+
+def mainDocumentBasedGamePlay(userName):
     global userScore, userOption, maxTime
     field = chooseFieldDocument()
     difficulty = chooseDifficulty()
@@ -105,7 +160,15 @@ def mainDocument():
         else:
             print("Oh! Wrong Option :(\n5 Points Deducted")
             userScore -= 5
+    saveScore(userName, userScore)
 
-mainDocument()
+userName = userNameAsk()
+userIntent = userIntentAsk(userName)
 
-print(f"Final Score: {userScore}")
+if userIntent == 1:
+    mainDocumentBasedGamePlay(userName)
+elif userIntent == 2:
+    pass
+elif userIntent == 3:
+    leaderboard()
+else: pass
