@@ -1,7 +1,11 @@
 # retireve questions from json -> ask user about his question choices -> present questions accordinly -> track time -> 1 point if succeed, -1 if fail -> add features: leaderboard, score saving, interactive console ui, AI based questions etc using HCAI
 
-import json, random
+import json, random, os
 from inputimeout import inputimeout, TimeoutOccurred
+from openrouter import OpenRouter
+from dotenv import load_dotenv
+
+load_dotenv()
 
 userOption = ""
 userScore = 0
@@ -70,6 +74,16 @@ def chooseDifficulty():
             print("Error: Please either choose 1, 2 or 3!")
             pass
     return difficulty
+
+def openSampleQuestionsFile():
+    try:
+        with open('sample.json', 'r',) as file:
+            rawData = json.load(file)
+    except FileNotFoundError:
+        print("Error: The file doesn't exist")
+    except json.JSONDecodeError:
+        print("Error: Can't Decode the JSON File")
+    return rawData
 
 def openQuestionsFile():
     try:
@@ -144,6 +158,62 @@ def leaderboard():
             print(f"{name} -> {score} Points")
     print("\n")
 
+def callAI(topic, difficulty, jsonData):
+    client = OpenRouter(
+        api_key= os.getenv("API_KEY"),
+        server_url="https://ai.hackclub.com/proxy/v1"
+    )
+
+    response = client.chat.send(
+        model="qwen/qwen3-32b",
+        messages=[
+            {
+                "role": "user",
+                "content": f"Generate five short MCQ's on {topic} with {difficulty} difficulty level. Make sure to responsd in JSON Format exactly like: {jsonData} - nothing else."
+            }
+        ],
+        stream=False,
+    )
+    rawdata = json.loads(response)
+    data = rawdata["choices"][0]["message"]["content"]
+    return data
+
+def mainAIBasedGamePlay(userName):
+    global userScore, userOption, maxTime
+    field = str(input("Enter the general field of quiz like Coding, Science, Astronomy etc: "))
+    difficulty = chooseDifficulty()
+    rawData = callAI(field, difficulty, openSampleQuestionsFile())
+    for question in randomizeList(retrieveQuestions(rawData, field, difficulty)):
+        print(question['question'])
+        optionsDict = question['options']
+        keys = list(optionsDict.keys())
+        values = list(optionsDict.values())
+        for i in range(4):
+            print(f"Option {keys[i]}: {values[i]}")
+        print("Time: 15 seconds")
+        try:
+            while True:
+                userOption = inputimeout(prompt="Correct Option: ", timeout=15)
+                if userOption.upper() != "A" and userOption.upper() != "B" and userOption.upper() != "C" and userOption.upper() != "D":
+                    print("Invalid Option Selected!")
+                    pass
+                else:
+                    print(f"You selected option {userOption.upper()}")
+                    break
+        except TimeoutOccurred:
+            print("\nTime's up!!")
+            userOption = "TIMEUP"
+        
+        if userOption == "TIMEUP":
+            print("You didn't selected any option :(\n5 Points Deducted")
+            userScore -= 5
+        elif userOption.upper() == question['answer']:
+            print("Correct Answer!\n15 Points Awarded")
+            userScore += 15
+        else:
+            print("Oh! Wrong Option :(\n5 Points Deducted")
+            userScore -= 5
+    saveScore(userName, userScore)
 
 def mainDocumentBasedGamePlay(userName):
     global userScore, userOption, maxTime
@@ -188,7 +258,7 @@ userIntent = userIntentAsk(userName)
 if userIntent == 1:
     mainDocumentBasedGamePlay(userName)
 elif userIntent == 2:
-    pass
+    mainAIBasedGamePlay(userName)
 elif userIntent == 3:
     leaderboard()
 else: pass

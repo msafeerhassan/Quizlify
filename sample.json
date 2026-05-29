@@ -1,0 +1,30 @@
+{
+    "questions": [
+        {
+            "id" : 1,
+            "category" : "Python",
+            "difficulty": "easy",
+            "question": "What does len() do?",
+            "options": {
+                "A": "Returns the number of items in an Object",
+                "B": "Generates a random number",
+                "C": "Shortens a string",
+                "D": "Converts a string to lowercase"
+            },
+            "answer": "A"
+        },
+        {
+            "id" : 2,
+            "category" : "Python",
+            "difficulty": "easy",
+            "question": "Which keyword is used to define a function in Python?",
+            "options": {
+                "A": "func",
+                "B": "define",
+                "C": "def",
+                "D": "function"
+            },
+            "answer": "C"
+        }
+    ]
+}
