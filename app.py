@@ -163,20 +163,19 @@ def callAI(topic, difficulty, jsonData):
         api_key= os.getenv("API_KEY"),
         server_url="https://ai.hackclub.com/proxy/v1"
     )
-
+    prompt = f"Generate 5 MCQs on {topic} ({difficulty} difficulty). Respond ONLY in this JSON format: {jsonData}"
     response = client.chat.send(
         model="qwen/qwen3-32b",
         messages=[
             {
                 "role": "user",
-                "content": f"Generate five short MCQ's on {topic} with {difficulty} difficulty level. Make sure to responsd in JSON Format exactly like: {jsonData} - nothing else."
+                "content": prompt
             }
         ],
         stream=False,
     )
-    rawdata = json.loads(response)
-    data = rawdata["choices"][0]["message"]["content"]
-    return data
+    data = response.choices[0].message.content
+    return json.load(data)
 
 def mainAIBasedGamePlay(userName):
     global userScore, userOption, maxTime
