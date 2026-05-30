@@ -175,10 +175,11 @@ def callAI(topic, difficulty, jsonData):
         stream=False,
     )
     data = response.choices[0].message.content
-    return json.load(data)
+    return json.loads(data)
 
 def mainAIBasedGamePlay(userName):
     global userScore, userOption, maxTime
+    userScore = 0
     field = str(input("Enter the general field of quiz like Coding, Science, Astronomy etc: "))
     difficulty = chooseDifficulty()
     rawData = callAI(field, difficulty, openSampleQuestionsFile())
@@ -216,6 +217,7 @@ def mainAIBasedGamePlay(userName):
 
 def mainDocumentBasedGamePlay(userName):
     global userScore, userOption, maxTime
+    userScore = 0
     field = chooseFieldDocument()
     difficulty = chooseDifficulty()
     rawData = openQuestionsFile()
