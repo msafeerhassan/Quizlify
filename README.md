@@ -16,7 +16,7 @@ A simply Quiz Game Coded in Python
 
 ### How to test it?
 
-Simply, run .exe (execution) file for running the game. If it fails, try using Command Prompt to open the .exe file. For running the AI Feature, go over to [Hack Club AI](ai.hackclub.com) and generate a free API Key.
+Simply, run .exe (execution) file for running the game. If it fails, try using Command Prompt to open the .exe file. For running the AI Feature, go over to [Hack Club AI](https://ai.hackclub.com) and generate a free API Key.
 
 ### Screenshots:
 
