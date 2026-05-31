@@ -1,11 +1,11 @@
 # retireve questions from json -> ask user about his question choices -> present questions accordinly -> track time -> 1 point if succeed, -1 if fail -> add features: leaderboard, score saving, interactive console ui, AI based questions etc using HCAI
 
-import json, random, os
+import json, random, time
 from inputimeout import inputimeout, TimeoutOccurred
 from openrouter import OpenRouter
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 userOption = ""
 userScore = 0
@@ -158,9 +158,9 @@ def leaderboard():
             print(f"{name} -> {score} Points")
     print("\n")
 
-def callAI(topic, difficulty, jsonData):
+def callAI(topic, difficulty, jsonData, APIkey):
     client = OpenRouter(
-        api_key= os.getenv("API_KEY"),
+        api_key= APIkey,
         server_url="https://ai.hackclub.com/proxy/v1"
     )
     prompt = f"Generate 5 MCQs on {topic} ({difficulty} difficulty). Respond ONLY in this JSON format: {jsonData}"
@@ -175,14 +175,21 @@ def callAI(topic, difficulty, jsonData):
         stream=False,
     )
     data = response.choices[0].message.content
+
+    startData = data.find('{')
+    endData = data.rfind('}')
+
+    if startData != -1 and endData != -1:
+        data = data[startData:endData+1]
+
     return json.loads(data)
 
-def mainAIBasedGamePlay(userName):
+def mainAIBasedGamePlay(userName, APIKey):
     global userScore, userOption, maxTime
     userScore = 0
     field = str(input("Enter the general field of quiz like Coding, Science, Astronomy etc: "))
     difficulty = chooseDifficulty()
-    rawData = callAI(field, difficulty, openSampleQuestionsFile())
+    rawData = callAI(field, difficulty, openSampleQuestionsFile(), APIKey)
     for question in randomizeList(retrieveQuestions(rawData, field, difficulty)):
         print(question['question'])
         optionsDict = question['options']
@@ -193,7 +200,7 @@ def mainAIBasedGamePlay(userName):
         print("Time: 15 seconds")
         try:
             while True:
-                userOption = inputimeout(prompt="Correct Option: ", timeout=15)
+                userOption = inputimeout(prompt="Choose Option: ", timeout=15)
                 if userOption.upper() != "A" and userOption.upper() != "B" and userOption.upper() != "C" and userOption.upper() != "D":
                     print("Invalid Option Selected!")
                     pass
@@ -211,7 +218,7 @@ def mainAIBasedGamePlay(userName):
             print("Correct Answer!\n15 Points Awarded")
             userScore += 15
         else:
-            print("Oh! Wrong Option :(\n5 Points Deducted")
+            print(f"Oh! Wrong Option :(. Correct Answer was {question['answer'].upper()}\n5 Points Deducted")
             userScore -= 5
     saveScore(userName, userScore)
 
@@ -249,7 +256,7 @@ def mainDocumentBasedGamePlay(userName):
             print("Correct Answer!\n15 Points Awarded")
             userScore += 15
         else:
-            print("Oh! Wrong Option :(\n5 Points Deducted")
+            print(f"Oh! Wrong Option :(. Correct Answer was {question['answer'].upper()}\n5 Points Deducted")
             userScore -= 5
     saveScore(userName, userScore)
 
@@ -273,14 +280,18 @@ if userIntent == 1:
         if playAgainAsk() == True:
             pass
         else:
+            time.sleep(2)
             break
 elif userIntent == 2:
+    apiKey = str(input("Please enter your Hack Club AI API Key: "))
     while True:
-        mainAIBasedGamePlay(userName)
+        mainAIBasedGamePlay(userName, apiKey)
         if playAgainAsk() == True:
             pass
         else:
+            time.sleep(2)
             break
 elif userIntent == 3:
     leaderboard()
+    time.sleep(10)
 else: pass

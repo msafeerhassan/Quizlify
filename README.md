@@ -19,3 +19,6 @@ A simply Quiz Game Coded in Python
 Simply, run .exe (execution) file for running the game. If it fails, try using Command Prompt to open the .exe file.
 
 ### Screenshots:
+
+[![Home Page Image](https://user-cdn.hackclub-assets.com/019e7c37-e506-7eff-b896-654ad3f7a09f/home_page.png)]
+[![Leaderboard Image](https://user-cdn.hackclub-assets.com/019e7c37-e774-7cf0-9d4a-2ee79379f649/leaderboard.png)]
