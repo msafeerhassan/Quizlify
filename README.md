@@ -18,6 +18,11 @@ A simply Quiz Game Coded in Python
 
 Simply, run .exe (execution) file for running the game. If it fails, try using Command Prompt to open the .exe file. For running the AI Feature, go over to [Hack Club AI](https://ai.hackclub.com) and generate a free API Key.
 
+For macOS, Linux: 
+1. Open Terminal
+2. Navigate to this projects directory
+3. Run the project using `python3 app.py`
+
 ### Screenshots:
 
 ![Home Page Image](https://user-cdn.hackclub-assets.com/019e7c37-e506-7eff-b896-654ad3f7a09f/home_page.png)
